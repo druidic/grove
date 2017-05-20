@@ -1,1 +1,1 @@
-var VERSION = 'development build'
+var VERSION = 'v0.2'
