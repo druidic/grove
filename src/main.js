@@ -71,7 +71,7 @@ click($powerSwitch, function() {
     // turn off
     groveWorker.terminate()
     groveWorker = null
-    redraw([])
+    redraw([], true)
   } else {
     // turn on
     groveWorker = GroveWorker(dataRecords, handleMessageFromWorker)
@@ -145,12 +145,13 @@ function setTitleTo(title) {
 }
 
 var previouslyDrawn = []
-function redraw(text) {
+function redraw(text, force) {
   var lineElements = $('#terminal p')
   for (var i = 0; i < lineElements.length; i++) {
-    if (text[i] !== previouslyDrawn[i]) {
-      lineElements[i].innerHTML = text[i] || ''
-      previouslyDrawn[i] = text[i]
+    var toDraw = text[i] || ''
+    if (force || toDraw !== previouslyDrawn[i]) {
+      lineElements[i].innerHTML = toDraw
+      previouslyDrawn[i] = toDraw
     }
   }
 }
